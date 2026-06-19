@@ -23,18 +23,19 @@ const punchlineEl = document.getElementById("punchline");
    5. Wrap it all in try / catch — on error, console.error it
       and show "Couldn't load a joke" in setupEl
    ------------------------------------------------------------ */
+async function fetchJoke() { setupEl.textContent = "Loading..."; punchlineEl.textContent = "";
+    // ✍️ Solve it here ✍️
 
-async function fetchJoke() {
-  // Show a loading message while we wait for the data
-  setupEl.textContent = "Loading...";
+try {
+  const response = await fetch(JOKE_URL);
+  const data = await response.json();
+
+  displayJoke(data);
+} catch (error) {
+  console.error(error);
+  setupEl.textContent = "Couldn't load a joke";
   punchlineEl.textContent = "";
-
-  // ✍️ Solve it here ✍️
-
-   
 }
-
-
 /* ------------------------------------------------------------
    Task 2: displayJoke(joke)
 
@@ -43,27 +44,30 @@ async function fetchJoke() {
    - set punchlineEl.textContent to joke.punchline
    
    ------------------------------------------------------------ */
-
 function displayJoke(joke) {
-  // ✍️ Solve it here ✍️
 
-   
-}
+ 
+// ✍️ Solve it here ✍️
+
+setupEl.textContent = joke.setup;
+punchlineEl.textContent = joke.punchline;
+/* ------------------------------------------------------------
+   Task 3: When #new-joke is clicked, load a new joke
+   ------------------------------------------------------------ */
+
+// ✍️ Solve it here ✍️
+const newJokeBtn = document.getElementById("new-joke");
+newJokeBtn.addEventListener("click", fetchJoke);
+
+
+
 
 
 /* ------------------------------------------------------------
-   Task 4: When #new-joke is clicked, load a new joke
+   Task 4: Load a joke when the page opens
    ------------------------------------------------------------ */
 
 // ✍️ Solve it here ✍️
 
-
-
-
-/* ------------------------------------------------------------
-   Task 3: Load a joke when the page opens
-   ------------------------------------------------------------ */
-
-// ✍️ Solve it here ✍️
-
+fetchJoke();
 
